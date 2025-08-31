@@ -2,7 +2,8 @@ import { useInterfaceStore } from '@/stores';
 import { useEffect } from 'react';
 
 import { Navbar } from '../navbar';
-import { SidebarLeftTab } from '../sidebar';
+import { SidebarLeft } from '../sidebar';
+import { ContentWrapper } from './styles';
 
 interface RouteManagerProps {
 	children?: React.ReactNode;
@@ -43,17 +44,11 @@ export const RouteManager: React.FC<RouteManagerProps> = props => {
 			)}
 			{interfaceStore.router.hasSidebarLeft && (
 				<>
-					<SidebarLeftTab />
+					<SidebarLeft />
 				</>
 			)}
 
-			<div
-				style={{
-					minHeight: '100vh',
-					minWidth: '100%'
-				}}>
-				{props.children}
-			</div>
+			<ContentWrapper>{props.children}</ContentWrapper>
 		</>
 	);
 };

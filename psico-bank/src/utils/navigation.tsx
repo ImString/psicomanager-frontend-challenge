@@ -1,24 +1,65 @@
-import { useInterfaceStore } from '@/stores';
+import { FaBuilding, FaBullhorn, FaCalendarAlt, FaFileAlt, FaMoneyBillAlt, FaUsers } from 'react-icons/fa';
+import { FaGear } from 'react-icons/fa6';
+import { IoIosSpeedometer } from 'react-icons/io';
 
 export interface NavigationTab {
 	id: string;
 	name: string;
-	url?: string;
+	url: string;
 	icon?: any;
-	tabs?: NavigationTab[];
 }
 
-export const getTabFromPath = (tabsPath: string[] = []): NavigationTab | null | undefined => {
-	const interfaceStore = useInterfaceStore();
+export const useNavigationItems = (): NavigationTab[] => {
+	const navigationItems = [
+		{
+			id: 'dashboard',
+			name: 'Painel',
+			icon: IoIosSpeedometer,
+			url: '/'
+		},
+		{
+			id: 'customers',
+			name: 'Clientes',
+			icon: FaUsers,
+			url: '/customers'
+		},
+		{
+			id: 'agenda',
+			name: 'Agenda',
+			icon: FaCalendarAlt,
+			url: '/agenda'
+		},
+		{
+			id: 'financial',
+			name: 'Financeiro',
+			icon: FaMoneyBillAlt,
+			url: '/financial'
+		},
+		{
+			id: 'transactions',
+			name: 'Relatórios',
+			icon: FaFileAlt,
+			url: '/transactions'
+		},
+		{
+			id: 'marketing',
+			name: 'Marketing',
+			icon: FaBullhorn,
+			url: '/marketing'
+		},
+		{
+			id: 'settings',
+			name: 'Configuração',
+			icon: FaGear,
+			url: '/settings'
+		},
+		{
+			id: 'my-clinic',
+			name: 'Minha clínica',
+			icon: FaBuilding,
+			url: '/my-clinic'
+		}
+	];
 
-	let tabResponse: NavigationTab | undefined | null = interfaceStore.navigationItems.find(
-		tab => tab.id === tabsPath[0]
-	);
-
-	for (const tabId of tabsPath.slice(1)) {
-		if (tabResponse?.tabs) tabResponse = tabResponse.tabs.find(tab => tab.id === tabId) || null;
-		if (!tabResponse) break;
-	}
-
-	return tabResponse || { id: 'home', name: 'Home', tabs: interfaceStore.navigationItems };
+	return navigationItems;
 };

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.nav`
 	position: fixed;
 	width: 100%;
+	z-index: 30;
 `;
 
 export const Container = styled.div`

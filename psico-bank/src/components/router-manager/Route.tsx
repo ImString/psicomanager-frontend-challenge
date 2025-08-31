@@ -2,6 +2,8 @@ import { useInterfaceStore } from '@/stores';
 import { ReactNode, Suspense, useEffect } from 'react';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 
+import { useNavigationItems } from '@/utils';
+
 export interface RouteManagerRouteProps {
 	title?: string;
 	hasNavbar?: boolean;
@@ -31,6 +33,8 @@ export const RouteManagerRoute: React.FC<RouteManagerRouteProps> = (props = {}) 
 		interfaceContext.router.setLocation(location);
 		interfaceContext.router.setParams(params);
 		interfaceContext.router.setSearchParams(searchParams);
+
+		interfaceContext.setNavigationItems(useNavigationItems());
 	}, [location.pathname, location.search]);
 
 	return (
