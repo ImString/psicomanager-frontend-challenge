@@ -1,3 +1,5 @@
+import { error } from 'console';
+
 export const theme = {
 	colors: {
 		primary: {
@@ -24,6 +26,28 @@ export const theme = {
 			70: '#677176',
 			80: '#4C5153',
 			90: '#3D3D3D'
+		},
+		feedback: {
+			success: {
+				['light']: '#DEF7E4',
+				['medium']: '#28A745',
+				['dark']: '#1C7330'
+			},
+			warning: {
+				['light']: '#FFFAD6',
+				['medium']: '#F4D400',
+				['dark']: '#CCB400'
+			},
+			information: {
+				['light']: '#ECF5FE',
+				['medium']: '#2196F3',
+				['dark']: '#042C4E'
+			},
+			error: {
+				['light']: '#FEF2EC',
+				['medium']: '#F44336',
+				['dark']: '#83171A'
+			}
 		}
 	},
 	shadows: {

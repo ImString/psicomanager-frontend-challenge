@@ -26,7 +26,7 @@ export const InputWrapper = styled.div`
 	}
 `;
 
-export const InputBox = styled.input`
+export const InputBox = styled.input<{ $hasIcon?: boolean }>`
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -36,14 +36,23 @@ export const InputBox = styled.input`
 	border-radius: 4px;
 	background: ${({ disabled, theme }) => (disabled ? theme.colors.neutral[10] : theme.colors.neutral[0])};
 	cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-	color: ${({ disabled, theme }) => (disabled ? theme.colors.neutral[60] : theme.colors.neutral[60])};
+	color: ${({ theme }) => theme.colors.neutral[60]};
 	transition: all 0.2s;
 
+	${({ $hasIcon }) =>
+		$hasIcon
+			? css`
+					padding-left: 2rem;
+				`
+			: ''}
+
 	&:focus {
+		color: ${({ theme }) => theme.colors.neutral[70]};
 		border-color: ${({ theme }) => theme.colors.primary[0]};
 	}
 
 	&:hover&:not(:disabled) {
+		color: ${({ theme }) => theme.colors.neutral[60]};
 		border-color: ${({ theme }) => theme.colors.neutral[90]};
 	}
 `;

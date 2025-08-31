@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaCaretDown } from 'react-icons/fa';
+import { BsCaretDownFill } from 'react-icons/bs';
 
 import { Container, Label, SelectBox, SelectedValue, Icon, OptionsList, Option } from './styles';
 
@@ -33,7 +33,7 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = props => {
 					{selected ? props.options.find(opt => opt.value === selected)?.label : props.placeholder}
 				</SelectedValue>
 				<Icon $open={isOpen}>
-					<FaCaretDown />
+					<BsCaretDownFill />
 				</Icon>
 			</SelectBox>
 
