@@ -1,0 +1,59 @@
+import { useInterfaceStore } from '@/stores';
+import { useEffect } from 'react';
+
+import { Navbar } from '../navbar';
+import { SidebarLeftTab } from '../sidebar';
+
+interface RouteManagerProps {
+	children?: React.ReactNode;
+}
+
+export const RouteManager: React.FC<RouteManagerProps> = props => {
+	const interfaceStore = useInterfaceStore();
+
+	useEffect(() => {
+		document.title = `PsicoBank - ${interfaceStore.router.title ? `${interfaceStore.router.title}` : ''}`;
+	}, [interfaceStore.router.title]);
+
+	useEffect(() => {
+		try {
+			const oldLinks = document.querySelectorAll('link[rel="icon"]');
+
+			for (const link of oldLinks) {
+				link.remove();
+			}
+		} catch (error) {}
+
+		let link = document.createElement('link');
+		link.rel = 'icon';
+		link.href = interfaceStore.favicon.length > 0 ? interfaceStore.favicon : '/favicon.ico';
+		document.head.appendChild(link);
+
+		return () => {
+			link?.remove?.();
+		};
+	}, [interfaceStore.favicon]);
+
+	return (
+		<>
+			{interfaceStore.router.hasNavbar && (
+				<>
+					<Navbar />
+				</>
+			)}
+			{interfaceStore.router.hasSidebarLeft && (
+				<>
+					<SidebarLeftTab />
+				</>
+			)}
+
+			<div
+				style={{
+					minHeight: '100vh',
+					minWidth: '100%'
+				}}>
+				{props.children}
+			</div>
+		</>
+	);
+};
