@@ -31,7 +31,6 @@ export const HomeRoutes = () => {
 				path="/customers"
 				element={
 					<RouteManagerRoute title="Clientes" hasNavbar hasSidebarLeft>
-						{' '}
 						<CustomersPage />
 					</RouteManagerRoute>
 				}
@@ -40,7 +39,6 @@ export const HomeRoutes = () => {
 				path="/agenda"
 				element={
 					<RouteManagerRoute title="Agenda" hasNavbar hasSidebarLeft>
-						{' '}
 						<AgendaPage />
 					</RouteManagerRoute>
 				}
@@ -49,7 +47,6 @@ export const HomeRoutes = () => {
 				path="/financial"
 				element={
 					<RouteManagerRoute title="Financeiro" hasNavbar hasSidebarLeft>
-						{' '}
 						<FinancialPage />
 					</RouteManagerRoute>
 				}
@@ -58,7 +55,6 @@ export const HomeRoutes = () => {
 				path="/transactions"
 				element={
 					<RouteManagerRoute title="Transações" hasNavbar hasSidebarLeft>
-						{' '}
 						<TransactionsPage />
 					</RouteManagerRoute>
 				}
@@ -67,7 +63,6 @@ export const HomeRoutes = () => {
 				path="/marketing"
 				element={
 					<RouteManagerRoute title="Marketing" hasNavbar hasSidebarLeft>
-						{' '}
 						<MarketingPage />
 					</RouteManagerRoute>
 				}
@@ -76,7 +71,6 @@ export const HomeRoutes = () => {
 				path="/settings"
 				element={
 					<RouteManagerRoute title="Configurações" hasNavbar hasSidebarLeft>
-						{' '}
 						<SettingsPage />
 					</RouteManagerRoute>
 				}
@@ -85,7 +79,6 @@ export const HomeRoutes = () => {
 				path="/my-clinic"
 				element={
 					<RouteManagerRoute title="Minha Clinica" hasNavbar hasSidebarLeft>
-						{' '}
 						<MyClinicPage />
 					</RouteManagerRoute>
 				}

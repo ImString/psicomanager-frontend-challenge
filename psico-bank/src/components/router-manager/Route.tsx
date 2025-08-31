@@ -39,9 +39,7 @@ export const RouteManagerRoute: React.FC<RouteManagerRouteProps> = (props = {}) 
 
 	return (
 		<>
-			<div>
-				<Suspense fallback={<div>Loading...</div>}>{props.children}</Suspense>
-			</div>
+			<Suspense fallback={<div>Loading...</div>}>{props.children}</Suspense>
 		</>
 	);
 };

@@ -48,7 +48,11 @@ export const RouteManager: React.FC<RouteManagerProps> = props => {
 				</>
 			)}
 
-			<ContentWrapper>{props.children}</ContentWrapper>
+			<ContentWrapper
+				$hasNavbar={interfaceStore.router.hasNavbar}
+				$hasSidebarLeft={interfaceStore.router.hasSidebarLeft}>
+				{props.children}
+			</ContentWrapper>
 		</>
 	);
 };

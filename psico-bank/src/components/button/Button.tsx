@@ -61,7 +61,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonPropsWithChildren>((pr
 				</>
 			)}
 
-			{!disableRipple && <Ripples duration={700} color="#080808" blur={0.2} opacity={0.3} fillAndHold optimize />}
+			{!disableRipple && (
+				<Ripples duration={700} color="#08080850" blur={0.2} opacity={0.3} fillAndHold optimize />
+			)}
 		</ButtonComponent>
 	);
 });
