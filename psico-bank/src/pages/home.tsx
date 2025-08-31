@@ -4,6 +4,7 @@ import { Button } from '@/components/button';
 import { CheckBox } from '@/components/checkbox';
 import { ContainerLayout } from '@/components/container';
 import { DropdownSelect } from '@/components/dropdown-select';
+import { TextInput } from '@/components/inputs';
 
 export const HomePage: React.FC = () => {
 	return (
@@ -56,6 +57,20 @@ export const HomePage: React.FC = () => {
 						onChange={val => console.log('Selecionado:', val)}
 						disabled
 					/>
+				</div>
+				<div style={{ display: 'flex', gap: '1rem' }}>
+					<TextInput
+						label="E-mail"
+						placeholder="Digite aqui"
+						onClickButton={async () => console.log('Apertei enter no texto')}
+					/>
+					<TextInput
+						label="E-mail"
+						placeholder="Digite aqui"
+						defaultValue={'email-teste@gmail.com'}
+						onClickButton={async () => console.log('Apertei enter no texto')}
+					/>
+					<TextInput label="E-mail" placeholder="Digite aqui" disabled />
 				</div>
 			</div>
 		</ContainerLayout>

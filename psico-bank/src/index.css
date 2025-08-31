@@ -19,6 +19,10 @@ input[type='reset'] {
 	outline: inherit;
 }
 
+input:focus {
+	outline: none;
+}
+
 li {
 	list-style-type: none;
 }
