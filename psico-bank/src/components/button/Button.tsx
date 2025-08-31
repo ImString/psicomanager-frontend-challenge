@@ -14,7 +14,7 @@ interface ButtonProps {
 	disableRipple?: boolean;
 }
 
-type ButtonPropsWithChildren = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> & ButtonProps;
+export type ButtonPropsWithChildren = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> & ButtonProps;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonPropsWithChildren>((props, ref) => {
 	const {

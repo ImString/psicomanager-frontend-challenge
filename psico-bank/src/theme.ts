@@ -25,5 +25,9 @@ export const theme = {
 			80: '#4C5153',
 			90: '#3D3D3D'
 		}
+	},
+	shadows: {
+		16: '0px 4px 16px rgba(125, 140, 148, 0.5)',
+		32: '0px 8px 32px rgba(125, 140, 148, 0.5)'
 	}
 };
