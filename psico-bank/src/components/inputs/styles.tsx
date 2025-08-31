@@ -15,7 +15,19 @@ export const Label = styled.label<{ $disabled?: boolean }>`
 	color: ${({ $disabled, theme }) => ($disabled ? theme.colors.neutral[60] : theme.colors.neutral[90])};
 `;
 
+export const InputWrapper = styled.div`
+	position: relative;
+	display: flex;
+
+	input {
+		font-size: 16px;
+		line-height: 24px;
+		font-family: 'Roboto', sans-serif;
+	}
+`;
+
 export const InputBox = styled.input`
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

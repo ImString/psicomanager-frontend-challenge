@@ -1,7 +1,7 @@
 import { forwardRef, useState } from 'react';
 
 import { BaseInput, BaseInputChildProps, BaseInputProps } from './Base';
-import { InputBox } from './styles';
+import { InputBox, InputWrapper } from './styles';
 
 type TextInputProps = BaseInputProps & {
 	placeholder?: string;
@@ -35,7 +35,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, re
 		<div>
 			<BaseInput {...props}>
 				{(baseInputProps: BaseInputChildProps) => (
-					<div>
+					<InputWrapper>
 						<InputBox
 							type={props.type || 'text'}
 							placeholder={props.placeholder}
@@ -48,7 +48,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, re
 							ref={ref}
 							readOnly={props.readOnly}
 						/>
-					</div>
+					</InputWrapper>
 				)}
 			</BaseInput>
 		</div>
