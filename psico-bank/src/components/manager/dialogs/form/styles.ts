@@ -16,12 +16,12 @@ export const Title = styled.h1`
 	font-family: 'Roboto', sans-serif;
 `;
 
-export const Subtitle = styled.h2`
+export const Subtitle = styled.h2<{ $marginTop?: string; $marginBottom?: string }>`
 	font-size: 20px;
 	font-weight: 500;
 	font-family: 'Roboto', sans-serif;
-	margin-top: 1.25rem;
-	margin-bottom: 1.25rem;
+	margin-top: ${({ $marginBottom }) => $marginBottom || '1.25rem'};
+	margin-bottom: ${({ $marginBottom }) => $marginBottom || '1.25rem'};
 `;
 
 export const CloseIcon = styled(IoClose)`

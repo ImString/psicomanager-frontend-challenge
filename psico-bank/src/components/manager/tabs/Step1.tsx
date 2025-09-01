@@ -1,22 +1,12 @@
-import { DropdownSelect } from '../dropdown-select';
-import { TextInput } from '../inputs';
-import { FormItem, FormWrapper } from './styles';
+import { DropdownSelect } from '../../dropdown-select';
+import { TextInput } from '../../inputs';
+import { FormItem, FormWrapper } from '../styles';
 
-interface ManagerContentProps {}
+interface ManagerStep1TabProps {}
 
-export const ManagerContent: React.FC<ManagerContentProps> = props => {
+export const ManagerStep1Tab: React.FC<ManagerStep1TabProps> = props => {
 	return (
 		<FormWrapper>
-			<FormItem>
-				<DropdownSelect
-					label="Profissional"
-					options={[{ value: 'item-1', label: 'Josão Silva' }]}
-					defaultValue="item-1"
-					interfaceOptions={{ width: '100%' }}
-					required
-					disabled
-				/>
-			</FormItem>
 			<FormItem>
 				<DropdownSelect
 					label="Banco"

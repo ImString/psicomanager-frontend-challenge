@@ -1,2 +1,2 @@
 export * from './dialogs';
-export * from './Content';
+export * from './tabs';
