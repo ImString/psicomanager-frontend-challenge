@@ -4,7 +4,7 @@ import { AlertBox } from '@/components/alert';
 import { Button } from '@/components/button';
 import { CenteredDialog } from '@/components/dialogs';
 import { DropdownSelect } from '@/components/dropdown-select';
-import { ManagerStep1Tab, ManagerStep2Tab } from '@/components/manager';
+import { ManagerStep1Tab, ManagerStep2Tab, ManagerStep3Tab } from '@/components/manager';
 import { StepDetails, Stepper } from '@/components/stepper';
 
 import { FormItem } from '../../styles';
@@ -28,6 +28,11 @@ export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
 		setCurrentStep(current => current + 1);
 	};
 
+	const handleCancelSubmit = () => {
+		setCurrentStep(0);
+		props.setIsOpen(false);
+	};
+
 	return (
 		<CenteredDialog isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
 			<Header>
@@ -47,7 +52,7 @@ export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
 				/>
 			)}
 
-			<FormItem style={{ marginTop: '1.25rem' }}>
+			<FormItem $marginTop="1.25rem">
 				<DropdownSelect
 					label="Profissional"
 					options={[{ value: 'item-1', label: 'Josão Silva' }]}
@@ -60,10 +65,11 @@ export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
 
 			{currentStep === 0 && <ManagerStep1Tab />}
 			{currentStep === 1 && <ManagerStep2Tab />}
+			{currentStep === 2 && <ManagerStep3Tab />}
 
 			<Footer>
 				<Buttons>
-					<Button label="Cancelar" theme="tertiary" onClick={() => props.setIsOpen(false)} />
+					<Button label="Cancelar" theme="tertiary" onClick={() => handleCancelSubmit()} />
 					<Button label="Próximo" theme="primary" onClick={() => handleNextSubmit()} />
 				</Buttons>
 			</Footer>

@@ -1,6 +1,7 @@
-import { DropdownSelect } from '../../dropdown-select';
-import { TextInput } from '../../inputs';
-import { FormItem, FormWrapper } from '../styles';
+import { DropdownSelect } from '@/components/dropdown-select';
+import { TextInput } from '@/components/inputs';
+
+import { FormItem, FormWrapper } from './styles';
 
 interface ManagerStep1TabProps {}
 
