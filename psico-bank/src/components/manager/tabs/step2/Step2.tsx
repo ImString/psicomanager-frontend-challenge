@@ -46,7 +46,7 @@ export const ManagerStep2Tab: React.FC = () => {
 
 	const insertButtonSubmit = () => {
 		const quill = quillRef.current?.getEditor();
-		if (!quill) return;
+		if (!quill || !dynamicMark) return;
 
 		let markName = '';
 		if (dynamicMark === 'customer-name') markName = 'NOME_CLIENTE';
