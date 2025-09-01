@@ -62,6 +62,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, re
 						disabled={props.disabled}
 						ref={ref}
 						readOnly={props.readOnly}
+						$hasError={baseInputProps.error.length > 0}
 						$hasIcon={!!props.icon}
 					/>
 				</InputWrapper>

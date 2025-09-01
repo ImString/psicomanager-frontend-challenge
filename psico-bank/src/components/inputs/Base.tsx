@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
+import { ChangeHandler, RefCallBack, useFormContext } from 'react-hook-form';
 
 import { InterfaceOptionsProps } from '@/utils';
 
-import { Container, Label, LabelRequired } from './styles';
+import { Container, ErrorMessage, Label, LabelRequired } from './styles';
 
 export type BaseInputChildProps<T = any> = {
 	value: T;
 	setValue: (value: T) => void;
+	error: string;
 };
 
 export type BaseInputValueState = [any, React.Dispatch<React.SetStateAction<any>>];
@@ -14,16 +16,23 @@ export type BaseInputErrorState = [string, React.Dispatch<React.SetStateAction<s
 type BaseInputChildren<T = any> = (props: BaseInputChildProps<T>) => React.ReactNode;
 
 export interface BaseInputProps {
-	name?: string;
 	label?: string;
 	valueState?: BaseInputValueState;
+	error?: string;
 	defaultValue?: any;
 	preChange?: (value: any) => any;
-	onChange?: (value: any) => void;
 	children?: BaseInputChildren;
 	interfaceOptions?: InterfaceOptionsProps;
+	hideError?: boolean;
 	required?: boolean;
 	disabled?: boolean;
+
+	// react-hook-form controller
+	name?: string;
+	value?: any;
+	onChange?: ChangeHandler;
+	onBlur?: ChangeHandler;
+	ref?: RefCallBack;
 }
 
 export const BaseInput: React.FC<BaseInputProps> = props => {
@@ -34,24 +43,32 @@ export const BaseInput: React.FC<BaseInputProps> = props => {
 		if (props.preChange) newInputValue = props.preChange(new_value);
 
 		setInputValue(newInputValue);
+
+		if (props.onChange) props.onChange({ target: { name: props.name, value: newInputValue } });
 	};
+
+	let rhfError: string | undefined;
+	try {
+		const {
+			formState: { errors }
+		} = useFormContext();
+		rhfError = props.name && errors && (errors as any)[props.name]?.message;
+	} catch {
+		rhfError = undefined;
+	}
+
+	const inputError = rhfError || props.error;
+
+	useEffect(() => {
+		if (props.value !== undefined && props.value !== inputValue) {
+			setInputValue(props.value);
+		}
+	}, [props.value]);
 
 	useEffect(() => {
 		if (props.defaultValue !== undefined && inputValue !== props.defaultValue)
 			handleChangeValue(props.defaultValue);
-
-		return () => {};
 	}, [props.defaultValue]);
-
-	useEffect(() => {
-		props.onChange?.(inputValue);
-
-		return () => {};
-	}, [inputValue]);
-
-	useEffect(() => {
-		if (props.onChange) props.onChange(inputValue);
-	}, [props.onChange]);
 
 	useEffect(() => {
 		if (props.preChange) handleChangeValue(inputValue);
@@ -59,18 +76,16 @@ export const BaseInput: React.FC<BaseInputProps> = props => {
 
 	useEffect(() => {
 		let newInputValue = inputValue;
-
 		if (props.preChange || (newInputValue && newInputValue !== inputValue)) handleChangeValue(newInputValue);
-
-		return () => {};
 	}, []);
 
 	const childProps = useMemo(
 		() => ({
 			value: inputValue,
-			setValue: handleChangeValue
+			setValue: handleChangeValue,
+			error: inputError || ''
 		}),
-		[inputValue]
+		[inputValue, inputError]
 	);
 
 	return (
@@ -82,6 +97,8 @@ export const BaseInput: React.FC<BaseInputProps> = props => {
 			)}
 
 			<div>{props.children?.(childProps)}</div>
+
+			{inputError && !props.hideError && <ErrorMessage>{inputError}</ErrorMessage>}
 		</Container>
 	);
 };

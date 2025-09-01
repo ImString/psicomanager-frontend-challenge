@@ -21,6 +21,13 @@ export const LabelRequired = styled.span`
 	color: ${({ theme }) => theme.colors.feedback.error.medium};
 `;
 
+export const ErrorMessage = styled.span`
+	color: ${({ theme }) => theme.colors.feedback.error.medium};
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 400;
+`;
+
 export const InputWrapper = styled.div`
 	position: relative;
 	display: flex;
@@ -32,14 +39,15 @@ export const InputWrapper = styled.div`
 	}
 `;
 
-export const InputBox = styled.input<{ $hasIcon?: boolean }>`
+export const InputBox = styled.input<{ $hasError?: boolean; $hasIcon?: boolean }>`
 	width: 100%;
 	height: 18px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 8px 12px;
-	border: 1px solid ${({ theme }) => theme.colors.neutral[30]};
+	border: 1px solid
+		${({ $hasError, theme }) => ($hasError ? theme.colors.feedback.error.medium : theme.colors.neutral[30])};
 	border-radius: 4px;
 	background: ${({ disabled, theme }) => (disabled ? theme.colors.neutral[10] : theme.colors.neutral[0])};
 	cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};

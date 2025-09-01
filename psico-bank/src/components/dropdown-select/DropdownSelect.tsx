@@ -1,30 +1,62 @@
 import { useState } from 'react';
+import { ChangeHandler, RefCallBack, useFormContext } from 'react-hook-form';
 import { BsCaretDownFill } from 'react-icons/bs';
 
 import { InterfaceOptionsProps } from '@/utils';
 
-import { Container, Label, SelectBox, SelectedValue, Icon, OptionsList, Option, LabelRequired } from './styles';
+import {
+	Container,
+	Label,
+	SelectBox,
+	SelectedValue,
+	Icon,
+	OptionsList,
+	Option,
+	LabelRequired,
+	ErrorMessage
+} from './styles';
 
 interface DropdownSelectProps {
 	label?: string;
 	placeholder?: string;
 	options: { value: string; label: string; disabled?: boolean }[];
+	error?: string;
 	defaultValue?: string;
-	disabled?: boolean;
+	hideError?: boolean;
 	required?: boolean;
+	disabled?: boolean;
 	interfaceOptions?: InterfaceOptionsProps;
-	onChange?: (value: string) => void;
+
+	// react-hook-form controller
+	name?: string;
+	value?: string;
+	onChange?: ChangeHandler;
+	onBlur?: ChangeHandler;
+	ref?: RefCallBack;
 }
 
 export const DropdownSelect: React.FC<DropdownSelectProps> = props => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [selected, setSelected] = useState<string | null>(props.defaultValue || null);
+	const [internalValue, setInternalValue] = useState<string | null>(props.defaultValue || null);
+
+	const selected = props.value ?? internalValue;
 
 	const handleSelect = (value: string) => {
-		setSelected(value);
+		setInternalValue(value);
+		if (props.name && props.onChange) props.onChange({ target: { name: props.name, value } });
+
 		setIsOpen(false);
-		props.onChange?.(value);
 	};
+
+	let inputError: string | undefined;
+	try {
+		const {
+			formState: { errors }
+		} = useFormContext();
+		inputError = props.name && errors && (errors as any)[props.name]?.message;
+	} catch {
+		inputError = props.error;
+	}
 
 	return (
 		<Container $interfaceOptions={props.interfaceOptions || {}}>
@@ -37,7 +69,8 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = props => {
 			<SelectBox
 				onClick={() => !props.disabled && setIsOpen(prev => !prev)}
 				$disabled={props.disabled}
-				$open={isOpen}>
+				$open={isOpen}
+				$hasError={!!inputError}>
 				<SelectedValue $placeholder={!selected}>
 					{selected ? props.options.find(opt => opt.value === selected)?.label : props.placeholder}
 				</SelectedValue>
@@ -58,6 +91,8 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = props => {
 					))}
 				</OptionsList>
 			)}
+
+			{inputError && !props.hideError && <ErrorMessage>{inputError}</ErrorMessage>}
 		</Container>
 	);
 };

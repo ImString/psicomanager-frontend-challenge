@@ -3,6 +3,14 @@ import styled from 'styled-components';
 
 export const Container = styled.div``;
 
+export const FormItem = styled.div`
+	display: flex;
+	width: 100%;
+	gap: 1.25rem;
+
+	margin-top: 1.25rem;
+`;
+
 export const Header = styled.div`
 	display: flex;
 	padding-top: 2rem;

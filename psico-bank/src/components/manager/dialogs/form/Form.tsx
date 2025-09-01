@@ -4,10 +4,18 @@ import { AlertBox } from '@/components/alert';
 import { Button } from '@/components/button';
 import { CenteredDialog } from '@/components/dialogs';
 import { DropdownSelect } from '@/components/dropdown-select';
-import { ManagerStep1Tab, ManagerStep2Tab, ManagerStep3Tab } from '@/components/manager';
+import {
+	clickNextButtonListen,
+	ManagerStep1Tab,
+	ManagerStep2Tab,
+	ManagerStep3Tab,
+	nextStepListen
+} from '@/components/manager';
 import { StepDetails, Stepper } from '@/components/stepper';
 
-import { FormItem } from '../../styles';
+import { useListener } from '@/utils';
+
+import { FormItem } from './styles';
 import { Buttons, CloseIcon, Footer, Header, Subtitle, Title } from './styles';
 
 interface ManagerFormDialogProps {
@@ -33,6 +41,12 @@ export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
 		props.setIsOpen(false);
 	};
 
+	nextStepListen.listen(() => {
+		if (currentStep < stepperDetails.length - 1) {
+			handleNextSubmit();
+		}
+	});
+
 	return (
 		<CenteredDialog isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
 			<Header>
@@ -52,7 +66,7 @@ export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
 				/>
 			)}
 
-			<FormItem $marginTop="1.25rem">
+			<FormItem>
 				<DropdownSelect
 					label="Profissional"
 					options={[{ value: 'item-1', label: 'Josão Silva' }]}
@@ -70,7 +84,11 @@ export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
 			<Footer>
 				<Buttons>
 					<Button label="Cancelar" theme="tertiary" onClick={() => handleCancelSubmit()} />
-					<Button label="Próximo" theme="primary" onClick={() => handleNextSubmit()} />
+					<Button
+						label="Próximo"
+						theme="primary"
+						onClick={() => clickNextButtonListen.emit({ step: currentStep })}
+					/>
 				</Buttons>
 			</Footer>
 		</CenteredDialog>
