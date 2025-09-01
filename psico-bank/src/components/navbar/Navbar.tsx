@@ -1,4 +1,5 @@
 import { BsBellFill, BsFillCameraVideoFill } from 'react-icons/bs';
+import { FaBars } from 'react-icons/fa';
 import { MdCamera, MdCircle, MdNotifications, MdSearch } from 'react-icons/md';
 
 import { TextInput } from '@/components/inputs';
@@ -14,6 +15,8 @@ import {
 	LogoImage,
 	LogoSpacer,
 	LogoWrapper,
+	Menu,
+	MenuWrapper,
 	RightItens,
 	SearchWrapper,
 	Wrapper
@@ -31,6 +34,9 @@ export const Navbar: React.FC<NavbarProps> = props => {
 							<LogoImage src="/logo.png" alt="PsicoBank" />
 							<LogoSpacer />
 						</LogoWrapper>
+						<MenuWrapper>
+							<Menu />
+						</MenuWrapper>
 						<SearchWrapper>
 							<TextInput placeholder="Buscar cliente" icon={MdSearch} />
 						</SearchWrapper>

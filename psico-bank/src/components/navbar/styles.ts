@@ -1,4 +1,5 @@
 import { BsFillCameraVideoFill } from 'react-icons/bs';
+import { FaBars } from 'react-icons/fa';
 import styled from 'styled-components';
 
 export const Wrapper = styled.nav`
@@ -30,6 +31,26 @@ export const RightItens = styled.div`
 export const LogoWrapper = styled.div`
 	display: flex;
 	align-items: center;
+	display: none;
+
+	@media (min-width: 1024px) {
+		display: flex;
+	}
+`;
+
+export const MenuWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding-left: 1rem;
+
+	@media (min-width: 1024px) {
+		display: none;
+	}
+`;
+
+export const Menu = styled(FaBars)`
+	cursor: pointer;
 `;
 
 export const LogoImage = styled.img`
