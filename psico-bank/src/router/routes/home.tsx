@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { RouteManagerRoute } from '@/components/router-manager';
 
@@ -19,8 +19,9 @@ const ComponentsPage = lazy(() => import('@/pages/components').then(module => ({
 export const HomeRoutes = () => {
 	return (
 		<Routes>
+			<Route path="/" element={<Navigate to="/financial" replace />} />
 			<Route
-				path="/"
+				path="/dashboard"
 				element={
 					<RouteManagerRoute title="Painel" hasNavbar hasSidebarLeft>
 						<DashboardPage />
