@@ -17,6 +17,10 @@ export const Label = styled.label<{ $disabled?: boolean }>`
 	color: ${({ $disabled, theme }) => ($disabled ? theme.colors.neutral[60] : theme.colors.neutral[90])};
 `;
 
+export const LabelRequired = styled.span`
+	color: ${({ theme }) => theme.colors.feedback.error.medium};
+`;
+
 export const InputWrapper = styled.div`
 	position: relative;
 	display: flex;

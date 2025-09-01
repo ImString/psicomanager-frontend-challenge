@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { InterfaceOptionsProps } from '@/utils';
 
-import { Container, Label } from './styles';
+import { Container, Label, LabelRequired } from './styles';
 
 export type BaseInputChildProps<T = any> = {
 	value: T;
@@ -22,6 +22,7 @@ export interface BaseInputProps {
 	onChange?: (value: any) => void;
 	children?: BaseInputChildren;
 	interfaceOptions?: InterfaceOptionsProps;
+	required?: boolean;
 	disabled?: boolean;
 }
 
@@ -74,7 +75,11 @@ export const BaseInput: React.FC<BaseInputProps> = props => {
 
 	return (
 		<Container $interfaceOptions={props.interfaceOptions || {}}>
-			{props.label && <Label $disabled={props.disabled}>{props.label}</Label>}
+			{props.label && (
+				<Label $disabled={props.disabled}>
+					{props.label} {props.required && <LabelRequired>*</LabelRequired>}
+				</Label>
+			)}
 
 			<div>{props.children?.(childProps)}</div>
 		</Container>

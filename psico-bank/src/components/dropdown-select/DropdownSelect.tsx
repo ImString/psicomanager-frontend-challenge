@@ -3,20 +3,22 @@ import { BsCaretDownFill } from 'react-icons/bs';
 
 import { InterfaceOptionsProps } from '@/utils';
 
-import { Container, Label, SelectBox, SelectedValue, Icon, OptionsList, Option } from './styles';
+import { Container, Label, SelectBox, SelectedValue, Icon, OptionsList, Option, LabelRequired } from './styles';
 
 interface DropdownSelectProps {
 	label?: string;
 	placeholder?: string;
 	options: { value: string; label: string; disabled?: boolean }[];
+	defaultValue?: string;
 	disabled?: boolean;
+	required?: boolean;
 	interfaceOptions?: InterfaceOptionsProps;
 	onChange?: (value: string) => void;
 }
 
 export const DropdownSelect: React.FC<DropdownSelectProps> = props => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [selected, setSelected] = useState<string | null>(null);
+	const [selected, setSelected] = useState<string | null>(props.defaultValue || null);
 
 	const handleSelect = (value: string) => {
 		setSelected(value);
@@ -26,7 +28,11 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = props => {
 
 	return (
 		<Container $interfaceOptions={props.interfaceOptions || {}}>
-			{props.label && <Label>{props.label}</Label>}
+			{props.label && (
+				<Label>
+					{props.label} {props.required && <LabelRequired>*</LabelRequired>}
+				</Label>
+			)}
 
 			<SelectBox
 				onClick={() => !props.disabled && setIsOpen(prev => !prev)}

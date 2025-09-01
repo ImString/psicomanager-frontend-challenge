@@ -17,6 +17,10 @@ export const Label = styled.label`
 	color: ${({ theme }) => theme.colors.neutral[90]};
 `;
 
+export const LabelRequired = styled.span`
+	color: ${({ theme }) => theme.colors.feedback.error.medium};
+`;
+
 export const SelectBox = styled.div<{ $disabled?: boolean; $open?: boolean }>`
 	display: flex;
 	align-items: center;
@@ -26,7 +30,7 @@ export const SelectBox = styled.div<{ $disabled?: boolean; $open?: boolean }>`
 	border-radius: 4px;
 	background: ${({ $disabled, theme }) => ($disabled ? theme.colors.neutral[10] : theme.colors.neutral[0])};
 	cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
-	color: ${({ $disabled, theme }) => ($disabled ? theme.colors.neutral[30] : theme.colors.neutral[60])};
+	color: ${({ $disabled, theme }) => ($disabled ? theme.colors.neutral[60] : theme.colors.neutral[60])};
 	transition: all 0.2s;
 
 	${({ $disabled }) =>

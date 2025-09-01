@@ -11,7 +11,6 @@ type TextInputProps = BaseInputProps & {
 	interfaceOptions?: InterfaceOptionsProps;
 	icon?: React.FC<{ style?: React.CSSProperties }>;
 	type?: React.InputHTMLAttributes<HTMLInputElement>['type'];
-	required?: boolean;
 	readOnly?: boolean;
 	onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void;
 	onClickButton?: () => Promise<void>;
