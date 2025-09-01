@@ -1,6 +1,7 @@
 import { theme } from '@/theme';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { Controller, FormProvider, SubmitErrorHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { AlertBox } from '@/components/alert';
 import { CheckBox } from '@/components/checkbox';
@@ -22,8 +23,12 @@ export const ManagerStep3Tab: React.FC<{}> = () => {
 		});
 	};
 
+	const onHandleError = (error: any) => {
+		toast.error('Os campos obrigatórios não foram preenchidos');
+	};
+
 	const handleNextStep = () => {
-		methods.handleSubmit(onHandleSubmit)();
+		methods.handleSubmit(onHandleSubmit, onHandleError)();
 	};
 
 	clickNextButtonListen.listen(data => {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { AlertBox } from '@/components/alert';
 import { Button } from '@/components/button';
@@ -13,6 +13,8 @@ import {
 } from '@/components/manager';
 import { StepDetails, Stepper } from '@/components/stepper';
 
+import { useStateRef } from '@/utils';
+
 import { FormItem } from './styles';
 import { Buttons, CloseIcon, Footer, Header, Subtitle, Title } from './styles';
 
@@ -22,8 +24,8 @@ interface ManagerFormDialogProps {
 }
 
 export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
-	const [currentStep, setCurrentStep] = useState(0);
-	const [stepsData, setStepsData] = useState<{ step: number; data: any }[]>([]);
+	const [currentStep, setCurrentStep, currentStepRef] = useStateRef(0);
+	const [stepsData, setStepsData, stepsDataRef] = useStateRef<{ step: number; data: any }[]>([]);
 
 	const stepperDetails: StepDetails[] = [
 		{ title: 'Cadastrar uma conta' },
@@ -42,10 +44,15 @@ export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
 	};
 
 	nextStepListen.listen(data => {
-		if (currentStep < stepperDetails.length - 1) {
-			console.log(data);
-			setStepsData(stepsData => [...stepsData, data]);
+		console.log(data);
+		setStepsData(stepsData => [...stepsData, data]);
+
+		if (currentStepRef.current < stepperDetails.length - 1) {
 			handleNextSubmit();
+		} else {
+			console.log('Acabou!', stepsDataRef.current);
+			toast.success('PsicoBank ativado!');
+			handleCancelSubmit();
 		}
 	});
 
