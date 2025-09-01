@@ -1,7 +1,10 @@
+import { useState } from 'react';
+
 import { AlertBox } from '@/components/alert';
 import { Button } from '@/components/button';
 import { CenteredDialog } from '@/components/dialogs';
 import { ManagerContent } from '@/components/manager';
+import { StepDetails, Stepper } from '@/components/stepper';
 
 import { Buttons, CloseIcon, Footer, Header, Subtitle, Title } from './styles';
 
@@ -11,12 +14,21 @@ interface ManagerFormDialogProps {
 }
 
 export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
+	const [currentStep, setCurrentStep] = useState(0);
+
+	const stepperDetails: StepDetails[] = [
+		{ title: 'Cadastrar uma conta' },
+		{ title: 'Canais de envio e Mensagem de cobrança' },
+		{ title: 'Forma de pagamento da cobrança' }
+	];
+
 	return (
 		<CenteredDialog isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
 			<Header>
 				<Title>Ativar o PsicoBank</Title>
 				<CloseIcon onClick={() => props.setIsOpen(false)} />
 			</Header>
+			<Stepper activeStep={currentStep} stepperDetails={stepperDetails} />
 			<Subtitle>Preencha os itens a seguir para configurar o PsicoBank</Subtitle>
 			<AlertBox
 				title="Atenção!!! Verifique atentamente a cada dado preenchido no cadastro de sua conta."

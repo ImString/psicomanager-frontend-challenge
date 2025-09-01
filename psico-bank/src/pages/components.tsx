@@ -5,8 +5,15 @@ import { CheckBox } from '@/components/checkbox';
 import { ContainerLayout } from '@/components/container';
 import { DropdownSelect } from '@/components/dropdown-select';
 import { TextInput } from '@/components/inputs';
+import { StepDetails, Stepper } from '@/components/stepper';
 
 export const ComponentsPage: React.FC = () => {
+	const stepperDetails: StepDetails[] = [
+		{ title: 'Cadastrar uma conta' },
+		{ title: 'Canais de envio e Mensagem de cobrança' },
+		{ title: 'Forma de pagamento da cobrança' }
+	];
+
 	return (
 		<ContainerLayout>
 			<div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -71,6 +78,9 @@ export const ComponentsPage: React.FC = () => {
 						onClickButton={async () => console.log('Apertei enter no texto')}
 					/>
 					<TextInput label="E-mail" placeholder="Digite aqui" disabled />
+				</div>
+				<div>
+					<Stepper activeStep={1} stepperDetails={stepperDetails} />
 				</div>
 			</div>
 		</ContainerLayout>
