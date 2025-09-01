@@ -13,8 +13,6 @@ import {
 } from '@/components/manager';
 import { StepDetails, Stepper } from '@/components/stepper';
 
-import { useListener } from '@/utils';
-
 import { FormItem } from './styles';
 import { Buttons, CloseIcon, Footer, Header, Subtitle, Title } from './styles';
 
@@ -25,6 +23,7 @@ interface ManagerFormDialogProps {
 
 export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
 	const [currentStep, setCurrentStep] = useState(0);
+	const [stepsData, setStepsData] = useState<{ step: number; data: any }[]>([]);
 
 	const stepperDetails: StepDetails[] = [
 		{ title: 'Cadastrar uma conta' },
@@ -38,11 +37,14 @@ export const ManagerFormDialog: React.FC<ManagerFormDialogProps> = props => {
 
 	const handleCancelSubmit = () => {
 		setCurrentStep(0);
+		setStepsData([]);
 		props.setIsOpen(false);
 	};
 
-	nextStepListen.listen(() => {
+	nextStepListen.listen(data => {
 		if (currentStep < stepperDetails.length - 1) {
+			console.log(data);
+			setStepsData(stepsData => [...stepsData, data]);
 			handleNextSubmit();
 		}
 	});

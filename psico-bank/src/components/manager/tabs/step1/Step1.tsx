@@ -3,7 +3,7 @@ import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 
 import { DropdownSelect } from '@/components/dropdown-select';
 import { TextInput } from '@/components/inputs';
-import { clickNextButtonListen } from '@/components/manager';
+import { clickNextButtonListen, nextStepListen } from '@/components/manager';
 
 import { ManagerStep1TabFormValues, step1Schema } from './schema';
 import { FormItem, FormWrapper } from './styles';
@@ -17,15 +17,14 @@ export const ManagerStep1Tab: React.FC = () => {
 	const typeOfPerson = watch('typeOfPerson');
 
 	const onHandleSubmit = (data: ManagerStep1TabFormValues) => {
-		console.log('dados válidos', data);
-	};
-
-	const onHandleError = (errors: any) => {
-		console.log('erros', errors);
+		nextStepListen.emit({
+			step: 1,
+			data
+		});
 	};
 
 	const handleNextStep = () => {
-		methods.handleSubmit(onHandleSubmit, onHandleError)();
+		methods.handleSubmit(onHandleSubmit)();
 	};
 
 	clickNextButtonListen.listen(data => {
@@ -100,6 +99,7 @@ export const ManagerStep1Tab: React.FC = () => {
 						<TextInput
 							label="CPF"
 							placeholder="___.___.___-__"
+							mask="999.999.999-99"
 							interfaceOptions={{ width: '100%' }}
 							required
 							{...methods.register('cpf')}
@@ -127,6 +127,7 @@ export const ManagerStep1Tab: React.FC = () => {
 							<TextInput
 								label="CNPJ"
 								placeholder="__.___.___/____-__"
+								mask="99.999.999/9999-99"
 								interfaceOptions={{ width: '100%' }}
 								required
 								{...methods.register('cnpj')}
@@ -155,6 +156,7 @@ export const ManagerStep1Tab: React.FC = () => {
 					<TextInput
 						label="Telefone"
 						placeholder="(__) _____-____"
+						mask="(99) 99999-9999"
 						interfaceOptions={{ width: '100%' }}
 						required
 						{...methods.register('phone')}
@@ -165,6 +167,7 @@ export const ManagerStep1Tab: React.FC = () => {
 					<TextInput
 						label="CEP:"
 						placeholder="Digite aqui"
+						mask="99999-999"
 						interfaceOptions={{ width: '100%' }}
 						required
 						{...methods.register('zipCode')}
@@ -225,6 +228,7 @@ export const ManagerStep1Tab: React.FC = () => {
 					<TextInput
 						label="Número:"
 						placeholder="Digite aqui"
+						mask="999999"
 						interfaceOptions={{ width: '35%' }}
 						required
 						{...methods.register('addressNumber')}

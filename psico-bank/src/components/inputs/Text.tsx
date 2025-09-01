@@ -1,19 +1,20 @@
 import { theme } from '@/theme';
 import { forwardRef, useState } from 'react';
 
-import { InterfaceOptionsProps } from '@/utils';
+import { applyMask } from '@/utils';
 
 import { BaseInput, BaseInputChildProps, BaseInputProps } from './Base';
 import { InputBox, InputWrapper } from './styles';
 
 type TextInputProps = BaseInputProps & {
 	placeholder?: string;
-	interfaceOptions?: InterfaceOptionsProps;
+	interfaceOptions?: Record<string, any>;
 	icon?: React.FC<{ style?: React.CSSProperties }>;
 	type?: React.InputHTMLAttributes<HTMLInputElement>['type'];
 	readOnly?: boolean;
 	onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void;
 	onClickButton?: () => Promise<void>;
+	mask?: string;
 };
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
@@ -22,9 +23,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, re
 	const handleOnClickButton = async () => {
 		if (isLoadingButton) return;
 		setIsLoadingButton(true);
-
 		await props.onClickButton?.();
-
 		setIsLoadingButton(false);
 	};
 
@@ -54,8 +53,17 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, re
 					<InputBox
 						type={props.type || 'text'}
 						placeholder={props.placeholder}
-						value={baseInputProps.value}
-						onChange={event => baseInputProps.setValue(event.target.value)}
+						value={props.mask ? applyMask(baseInputProps.value ?? '', props.mask) : baseInputProps.value}
+						onChange={event => {
+							const rawValue = event.target.value;
+
+							if (props.mask) {
+								const digits = rawValue.replace(/\D/g, '');
+								baseInputProps.setValue(digits);
+							} else {
+								baseInputProps.setValue(rawValue);
+							}
+						}}
 						onPaste={props.onPaste}
 						onKeyDown={handleOnKeyDown}
 						required={props.required}
