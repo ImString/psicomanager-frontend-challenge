@@ -92,10 +92,7 @@ export const ManagerStep1Tab: React.FC = () => {
 						required
 						{...methods.register('typeOfPerson')}
 					/>
-				</FormItem>
-
-				{typeOfPerson === 'pessoa-fisica' && (
-					<FormItem>
+					{typeOfPerson === 'pessoa-fisica' && (
 						<TextInput
 							label="CPF"
 							placeholder="___.___.___-__"
@@ -104,55 +101,17 @@ export const ManagerStep1Tab: React.FC = () => {
 							required
 							{...methods.register('cpf')}
 						/>
+					)}
+					{typeOfPerson === 'pessoa-juridica' && (
 						<TextInput
-							label="Nome completo:"
-							placeholder="Digite aqui"
+							label="CNPJ"
+							placeholder="__.___.___/____-__"
+							mask="99.999.999/9999-99"
 							interfaceOptions={{ width: '100%' }}
 							required
-							{...methods.register('fullName')}
+							{...methods.register('cnpj')}
 						/>
-					</FormItem>
-				)}
-
-				{typeOfPerson === 'pessoa-juridica' && (
-					<>
-						<FormItem>
-							<TextInput
-								label="Razão Social"
-								placeholder="Digite aqui"
-								interfaceOptions={{ width: '100%' }}
-								required
-								{...methods.register('razaoSocial')}
-							/>
-							<TextInput
-								label="CNPJ"
-								placeholder="__.___.___/____-__"
-								mask="99.999.999/9999-99"
-								interfaceOptions={{ width: '100%' }}
-								required
-								{...methods.register('cnpj')}
-							/>
-						</FormItem>
-						<FormItem>
-							<TextInput
-								label="Nome do responsável"
-								placeholder="Digite aqui"
-								interfaceOptions={{ width: '100%' }}
-								required
-								{...methods.register('responsavelNome')}
-							/>
-							<TextInput
-								label="CPF do responsável"
-								placeholder="___.___.___-__"
-								interfaceOptions={{ width: '100%' }}
-								required
-								{...methods.register('responsavelCpf')}
-							/>
-						</FormItem>
-					</>
-				)}
-
-				<FormItem>
+					)}
 					<TextInput
 						label="Telefone"
 						placeholder="(__) _____-____"
@@ -161,6 +120,48 @@ export const ManagerStep1Tab: React.FC = () => {
 						required
 						{...methods.register('phone')}
 					/>
+				</FormItem>
+
+				{typeOfPerson === 'pessoa-juridica' && (
+					<FormItem>
+						<TextInput
+							label="Nome do responsável"
+							placeholder="Digite aqui"
+							interfaceOptions={{ width: '100%' }}
+							required
+							{...methods.register('responsibleName')}
+						/>
+						<TextInput
+							label="CPF do responsável"
+							placeholder="___.___.___-__"
+							mask="999.999.999-99"
+							interfaceOptions={{ width: '100%' }}
+							required
+							{...methods.register('responsibleCpf')}
+						/>
+					</FormItem>
+				)}
+
+				<FormItem>
+					{typeOfPerson === 'pessoa-fisica' && (
+						<TextInput
+							label="Nome completo:"
+							placeholder="Digite aqui"
+							interfaceOptions={{ width: '100%' }}
+							required
+							{...methods.register('fullName')}
+						/>
+					)}
+
+					{typeOfPerson === 'pessoa-juridica' && (
+						<TextInput
+							label="Razão Social"
+							placeholder="Digite aqui"
+							interfaceOptions={{ width: '100%' }}
+							required
+							{...methods.register('razaoSocial')}
+						/>
+					)}
 				</FormItem>
 
 				<FormItem>
