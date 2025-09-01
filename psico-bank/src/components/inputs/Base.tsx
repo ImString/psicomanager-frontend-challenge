@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
+import { InterfaceOptionsProps } from '@/utils';
+
 import { Container, Label } from './styles';
 
 export type BaseInputChildProps<T = any> = {
@@ -19,6 +21,7 @@ export interface BaseInputProps {
 	preChange?: (value: any) => any;
 	onChange?: (value: any) => void;
 	children?: BaseInputChildren;
+	interfaceOptions?: InterfaceOptionsProps;
 	disabled?: boolean;
 }
 
@@ -70,7 +73,7 @@ export const BaseInput: React.FC<BaseInputProps> = props => {
 	);
 
 	return (
-		<Container>
+		<Container $interfaceOptions={props.interfaceOptions || {}}>
 			{props.label && <Label $disabled={props.disabled}>{props.label}</Label>}
 
 			<div>{props.children?.(childProps)}</div>

@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+import { InterfaceOptionsProps } from '@/utils';
+
+export const Container = styled.div<{ $interfaceOptions?: InterfaceOptionsProps }>`
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
-	width: 220px;
+	width: ${({ $interfaceOptions }) => ($interfaceOptions?.width ? $interfaceOptions.width : '220px')};
 	position: relative;
 	font-family: 'Roboto', sans-serif;
 `;

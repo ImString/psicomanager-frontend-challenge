@@ -8,46 +8,59 @@ export const ManagerContent: React.FC<ManagerContentProps> = props => {
 	return (
 		<FormWrapper>
 			<FormItem>
-				<DropdownSelect label="Profissional" options={[{ value: '1', label: 'Josão Silva' }]} disabled />
-			</FormItem>
-			<FormItem>
-				<DropdownSelect label="Banco" options={[{ value: '1', label: 'Josão Silva', disabled: true }]} />
 				<DropdownSelect
-					label="Tipo de conta:"
-					options={[{ value: '1', label: 'Josão Silva', disabled: true }]}
+					label="Profissional"
+					options={[{ value: '1', label: 'Josão Silva' }]}
+					interfaceOptions={{ width: '100%' }}
+					disabled
 				/>
 			</FormItem>
 			<FormItem>
-				<TextInput label="Agência:" placeholder="Digite aqui" />
-				<TextInput label="Conta com dígito:" placeholder="Digite aqui" />
+				<DropdownSelect
+					label="Banco"
+					options={[{ value: '1', label: 'Josão Silva', disabled: true }]}
+					interfaceOptions={{ width: '100%' }}
+				/>
+				<DropdownSelect
+					label="Tipo de conta:"
+					options={[{ value: '1', label: 'Josão Silva', disabled: true }]}
+					interfaceOptions={{ width: '100%' }}
+				/>
+			</FormItem>
+			<FormItem>
+				<TextInput label="Agência:" placeholder="Digite aqui" interfaceOptions={{ width: '100%' }} />
+				<TextInput label="Conta com dígito:" placeholder="Digite aqui" interfaceOptions={{ width: '100%' }} />
 			</FormItem>
 			<FormItem>
 				<DropdownSelect
 					label="Tipo de pessoa"
 					options={[{ value: '1', label: 'Josão Silva', disabled: true }]}
+					interfaceOptions={{ width: '100%' }}
 				/>
-				<TextInput label="CPF" placeholder="___.___.___-__" />
-				<TextInput label="Telefone" placeholder="(__) _____-____" />
+				<TextInput label="CPF" placeholder="___.___.___-__" interfaceOptions={{ width: '100%' }} />
+				<TextInput label="Telefone" placeholder="(__) _____-____" interfaceOptions={{ width: '100%' }} />
 			</FormItem>
 			<FormItem>
-				<TextInput label="Nome completo:" placeholder="Digite aqui" />
+				<TextInput label="Nome completo:" placeholder="Digite aqui" interfaceOptions={{ width: '100%' }} />
 			</FormItem>
 			<FormItem>
-				<TextInput label="CEP:" placeholder="Digite aqui" />
+				<TextInput label="CEP:" placeholder="Digite aqui" interfaceOptions={{ width: '100%' }} />
 				<DropdownSelect
 					label="Estado:"
 					placeholder="Selecione"
 					options={[{ value: '1', label: 'Josão Silva', disabled: true }]}
+					interfaceOptions={{ width: '100%' }}
 				/>
 				<DropdownSelect
 					label="Cidade:"
 					placeholder="Selecione"
 					options={[{ value: '1', label: 'Josão Silva', disabled: true }]}
+					interfaceOptions={{ width: '100%' }}
 				/>
 			</FormItem>
 			<FormItem>
-				<TextInput label="Endereço:" placeholder="Digite aqui" />
-				<TextInput label="Número:" placeholder="Digite aqui" />
+				<TextInput label="Endereço:" placeholder="Digite aqui" interfaceOptions={{ width: '65%' }} />
+				<TextInput label="Número:" placeholder="Digite aqui" interfaceOptions={{ width: '35%' }} />
 			</FormItem>
 		</FormWrapper>
 	);

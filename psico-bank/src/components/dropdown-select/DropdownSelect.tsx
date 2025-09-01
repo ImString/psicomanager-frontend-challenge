@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { BsCaretDownFill } from 'react-icons/bs';
 
+import { InterfaceOptionsProps } from '@/utils';
+
 import { Container, Label, SelectBox, SelectedValue, Icon, OptionsList, Option } from './styles';
 
 interface DropdownSelectProps {
@@ -8,6 +10,7 @@ interface DropdownSelectProps {
 	placeholder?: string;
 	options: { value: string; label: string; disabled?: boolean }[];
 	disabled?: boolean;
+	interfaceOptions?: InterfaceOptionsProps;
 	onChange?: (value: string) => void;
 }
 
@@ -22,7 +25,7 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = props => {
 	};
 
 	return (
-		<Container>
+		<Container $interfaceOptions={props.interfaceOptions || {}}>
 			{props.label && <Label>{props.label}</Label>}
 
 			<SelectBox
