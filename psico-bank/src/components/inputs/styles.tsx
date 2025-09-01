@@ -28,6 +28,7 @@ export const InputWrapper = styled.div`
 
 export const InputBox = styled.input<{ $hasIcon?: boolean }>`
 	width: 100%;
+	height: 18px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
